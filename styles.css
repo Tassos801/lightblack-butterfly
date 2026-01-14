@@ -44,7 +44,9 @@ body {
     color: var(--bg-color);
 }
 
-/* Info Button */
+/* ============================================
+   Info Button
+   ============================================ */
 .info-btn {
     position: fixed;
     top: 2rem;
@@ -79,6 +81,7 @@ body {
     transform: rotate(-90deg);
 }
 
+/* When panel is open */
 body.panel-open .info-icon {
     opacity: 0;
     transform: rotate(90deg);
@@ -89,7 +92,9 @@ body.panel-open .close-icon {
     transform: rotate(0);
 }
 
-/* Main Content - Logo */
+/* ============================================
+   Main Content - Logo
+   ============================================ */
 .main-content {
     min-height: 100vh;
     display: flex;
@@ -113,12 +118,16 @@ body.panel-open .close-icon {
     margin-left: 0.05em;
 }
 
+/* Hide logo when panel is open */
 body.panel-open .main-content {
     animation: none;
     opacity: 0;
     pointer-events: none;
 }
 
+/* ============================================
+   Logo Container
+   ============================================ */
 .logo-container {
     position: relative;
     display: flex;
@@ -127,7 +136,9 @@ body.panel-open .main-content {
     gap: 1rem;
 }
 
-/* Butterfly Animation */
+/* ============================================
+   Butterfly Animation (JS-controlled flight)
+   ============================================ */
 .butterfly-container {
     position: fixed;
     top: 50%;
@@ -147,6 +158,7 @@ body.panel-open .main-content {
     transition: filter 0.3s ease;
 }
 
+/* Wing flapping animation - natural rhythm */
 .wing {
     transform-origin: 73px 67px;
     transition: transform 0.15s ease;
@@ -160,6 +172,7 @@ body.panel-open .main-content {
     animation: wingFlapLeft var(--wing-duration, 0.18s) ease-in-out infinite;
 }
 
+/* Wings folded state (when sitting) */
 .butterfly-container.wings-folded .wing-right,
 .butterfly-container.wings-folded .wing-left {
     animation: none;
@@ -173,28 +186,60 @@ body.panel-open .main-content {
     transform: scaleX(0.55) scaleY(0.95);
 }
 
+/* Hide butterfly when panel is open */
 body.panel-open .butterfly-container {
     opacity: 0 !important;
     transition: opacity 0.3s ease;
 }
 
+/* Wing Keyframe Animations - smooth, natural */
 @keyframes wingFlapRight {
-    0% { transform: scaleX(1) scaleY(1); }
-    25% { transform: scaleX(0.8) scaleY(0.97); }
-    50% { transform: scaleX(0.6) scaleY(0.94); }
-    75% { transform: scaleX(0.8) scaleY(0.97); }
-    100% { transform: scaleX(1) scaleY(1); }
+    0% {
+        transform: scaleX(1) scaleY(1);
+    }
+
+    25% {
+        transform: scaleX(0.8) scaleY(0.97);
+    }
+
+    50% {
+        transform: scaleX(0.6) scaleY(0.94);
+    }
+
+    75% {
+        transform: scaleX(0.8) scaleY(0.97);
+    }
+
+    100% {
+        transform: scaleX(1) scaleY(1);
+    }
 }
 
 @keyframes wingFlapLeft {
-    0% { transform: scaleX(1) scaleY(1); }
-    25% { transform: scaleX(0.85) scaleY(0.98); }
-    50% { transform: scaleX(0.65) scaleY(0.95); }
-    75% { transform: scaleX(0.85) scaleY(0.98); }
-    100% { transform: scaleX(1) scaleY(1); }
+    0% {
+        transform: scaleX(1) scaleY(1);
+    }
+
+    25% {
+        transform: scaleX(0.85) scaleY(0.98);
+    }
+
+    50% {
+        transform: scaleX(0.65) scaleY(0.95);
+    }
+
+    75% {
+        transform: scaleX(0.85) scaleY(0.98);
+    }
+
+    100% {
+        transform: scaleX(1) scaleY(1);
+    }
 }
 
-/* Info Panel Overlay */
+/* ============================================
+   Info Panel Overlay
+   ============================================ */
 .info-panel {
     position: fixed;
     top: 0;
@@ -239,6 +284,9 @@ body.panel-open .info-content {
     line-height: 1.5;
 }
 
+/* ============================================
+   Services List
+   ============================================ */
 .services-list {
     list-style: none;
     margin-bottom: 2.5rem;
@@ -254,20 +302,47 @@ body.panel-open .info-content {
         transform 0.4s var(--transition-ease);
 }
 
+/* Staggered animation for list items */
 body.panel-open .services-list li {
     opacity: 1;
     transform: translateY(0);
 }
 
-body.panel-open .services-list li:nth-child(1) { transition-delay: 0.1s; }
-body.panel-open .services-list li:nth-child(2) { transition-delay: 0.15s; }
-body.panel-open .services-list li:nth-child(3) { transition-delay: 0.2s; }
-body.panel-open .services-list li:nth-child(4) { transition-delay: 0.25s; }
-body.panel-open .services-list li:nth-child(5) { transition-delay: 0.3s; }
-body.panel-open .services-list li:nth-child(6) { transition-delay: 0.35s; }
-body.panel-open .services-list li:nth-child(7) { transition-delay: 0.4s; }
-body.panel-open .services-list li:nth-child(8) { transition-delay: 0.45s; }
+body.panel-open .services-list li:nth-child(1) {
+    transition-delay: 0.1s;
+}
 
+body.panel-open .services-list li:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+body.panel-open .services-list li:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+body.panel-open .services-list li:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+body.panel-open .services-list li:nth-child(5) {
+    transition-delay: 0.3s;
+}
+
+body.panel-open .services-list li:nth-child(6) {
+    transition-delay: 0.35s;
+}
+
+body.panel-open .services-list li:nth-child(7) {
+    transition-delay: 0.4s;
+}
+
+body.panel-open .services-list li:nth-child(8) {
+    transition-delay: 0.45s;
+}
+
+/* ============================================
+   Footer Text & Links
+   ============================================ */
 .footer-text {
     font-size: clamp(0.95rem, 2vw, 1.1rem);
     font-style: italic;
@@ -286,23 +361,231 @@ body.panel-open .services-list li:nth-child(8) { transition-delay: 0.45s; }
     opacity: 0.6;
 }
 
+/* ============================================
+   Animations
+   ============================================ */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
+/* ============================================
+   Scroll Indicator
+   ============================================ */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s var(--transition-ease) 1.5s forwards;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-indicator span {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-light), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(1.2);
+    }
+}
+
+/* Hide scroll indicator when scrolled */
+.scroll-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ============================================
+   Case Studies Section
+   ============================================ */
+.case-studies {
+    min-height: 100vh;
+    padding: 8rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.case-study {
+    text-align: center;
+    max-width: 700px;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s var(--transition-ease),
+        transform 0.8s var(--transition-ease);
+}
+
+.case-study.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.case-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    transition: letter-spacing 0.4s ease, opacity 0.3s ease;
+    cursor: default;
+}
+
+.case-title:hover {
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+}
+
+.case-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.case-description {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    line-height: 1.8;
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Staggered reveal for case studies */
+.case-study[data-index="0"] {
+    transition-delay: 0s;
+}
+
+.case-study[data-index="1"] {
+    transition-delay: 0.1s;
+}
+
+.case-study[data-index="2"] {
+    transition-delay: 0.2s;
+}
+
+.case-study[data-index="3"] {
+    transition-delay: 0.3s;
+}
+
+.case-study[data-index="4"] {
+    transition-delay: 0.4s;
+}
+
+.case-study[data-index="5"] {
+    transition-delay: 0.5s;
+}
+
+/* ============================================
+   Hero Scroll Fade Effect
+   ============================================ */
+.main-content {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    will-change: opacity, transform;
+}
+
+.main-content.scrolled {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Hide scroll indicator when scrolled */
+body.panel-open .scroll-indicator {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ============================================
+   Responsive Design
+   ============================================ */
 @media (max-width: 768px) {
-    .info-btn { top: 1.5rem; right: 1.5rem; }
+    .info-btn {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .main-content,
+    .info-panel {
+        padding: 1.5rem;
+    }
+
+    .tagline {
+        margin-bottom: 2rem;
+    }
+
+    .services-list {
+        margin-bottom: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .info-btn { top: 1rem; right: 1rem; }
-}
+    .info-btn {
+        top: 1rem;
+        right: 1rem;
+    }
 
+    .main-content,
+    .info-panel {
+        padding: 1rem;
+    }}
+
+/* ============================================
+   Accessibility
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* Focus states for keyboard navigation */
+.info-btn:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 4px;
+}
+
+.link:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
 }
