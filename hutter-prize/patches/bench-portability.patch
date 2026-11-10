@@ -1,0 +1,42 @@
+diff -ru a/models/ppmd.cpp src/models/ppmd.cpp
+--- src/models/ppmd.cpp	2026-11-10 18:29:22.334618829 +0000
++++ src/models/ppmd.cpp	2026-11-10 18:33:34.344581694 +0000
+@@ -30,7 +30,10 @@
+ // This will reduce RAM usage, but will be slower as well. *Warning*: this will
+ // write a *lot* of data to disk, so can reduce the lifespan of SSDs. Not
+ // recommended for normal usage.
+-bool mmap_to_disk = true;
++#ifndef PPMD_MMAP_TO_DISK
++#define PPMD_MMAP_TO_DISK 1
++#endif
++bool mmap_to_disk = PPMD_MMAP_TO_DISK;  // bench patch: -DPPMD_MMAP_TO_DISK=0 keeps PPM in RAM
+ qword mmap_size;
+ static constexpr char mmap_path[] = "ppm.temp";
+ 
+@@ -1394,7 +1397,10 @@
+       exit(EXIT_FAILURE);
+     }
+     int fd = open(mmap_path, O_RDWR);
+-    ppmd_model_->HeapStart = (byte*) mmap(NULL, mmap_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
++    // bench patch: the model holds raw pointers into the heap, so the remap MUST
++    // land at the same address. The original relied on the kernel returning it
++    // by luck (segfaults on Linux 6.x); MAP_FIXED on the range just unmapped.
++    ppmd_model_->HeapStart = (byte*) mmap(ppmd_model_->HeapStart, mmap_size, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_FIXED, fd, 0);
+     if(ppmd_model_->HeapStart == MAP_FAILED) {
+       exit(EXIT_FAILURE);
+     }
+diff -ru a/predictor.cpp src/predictor.cpp
+--- src/predictor.cpp	2026-11-10 18:29:22.334618829 +0000
++++ src/predictor.cpp	2026-11-10 18:33:34.344943415 +0000
+@@ -53,7 +53,10 @@
+ }
+ 
+ void Predictor::AddPPMD() {
+-  byte_model_.emplace(25, 14000, manager_.bit_context_, vocab_);
++  #ifndef PPMD_MB
++#define PPMD_MB 14000
++#endif
++  byte_model_.emplace(25, PPMD_MB, manager_.bit_context_, vocab_);  // bench patch: -DPPMD_MB=n
+ }
+ 
+ void Predictor::AddWord() {
